@@ -39,3 +39,9 @@ header h1 a {
 .post-entry h2 a:hover {
   color: red;
 }
+
+.vvv {
+  display: "flex";
+  flex-direction: "row";
+  gap: 40px;
+}

@@ -1,7 +1,11 @@
-{% extends 'base.html' %} {% block content %}
+{% extends "base.html" %} {% block content %}
 <div>
   <h2>{{blogpost.title}}</h2>
   <p>{{blogpost.body}}</p>
   <span>{{blogpost.author}}</span>
+  <div class="vvv">
+    <a href="{% url 'update_post' blogpost.pk %}">+ Edit Post</a>
+    <a href="{% url 'delete_post' blogpost.pk %}">- Delete Post</a>
+  </div>
 </div>
 {% endblock content%}

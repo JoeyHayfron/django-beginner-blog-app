@@ -40,3 +40,29 @@ class BlogPostsModelTest(TestCase):
         self.assertEqual(non_response.status_code, 404)
         self.assertContains(response, 'Nice body content')
         self.assertTemplateUsed(response, 'blog_post.html')
+        
+    def test_get_absolute_url(self):
+        response = self.post.get_absolute_url()
+        self.assertEqual(response, '/blogpost/1/')
+    
+    def test_post_create_view(self):
+        response = self.client.post(reverse('new_post'), {
+            'title': 'A new one',
+            'body': 'New body',
+            'author': self.user    
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'A new one')
+        self.assertContains(response, 'New body')
+        
+        
+    def test_edit_post_view(self):
+        response = self.client.post(reverse('update_post', args="1"), {
+            'title': 'NEw',
+            'body': 'I will be the greatest Python dev'
+        })
+        self.assertEqual(response.status_code, 302)
+        
+    def test_delete_post(self):
+         response = self.client.post(reverse('delete_post',args='1') )
+         self.assertEqual(response.status_code, 302)
